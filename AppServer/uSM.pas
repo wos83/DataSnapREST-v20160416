@@ -65,6 +65,8 @@ type
       function GetEmployeeId_Data(AId: integer): TFDJSONDataSets;
       function GetEmployeeId_Bool(AId: integer; var AMessage: string): Boolean;
 
+      function SetEmployee(AEmpNo: integer; AFullName: string): Boolean;
+
       { Public declarations }
    end;
    {$METHODINFO OFF}
@@ -90,6 +92,44 @@ end;
 function TSM.ReverseString(const Value: string): string;
 begin
    Result := System.StrUtils.ReverseString(Value);
+end;
+
+function TSM.SetEmployee(AEmpNo: integer; AFullName: string): Boolean;
+begin
+   FDQry.Close;
+   FDQry.SQL.Text := //
+      'INSERT INTO EMPLOYEE (' + //
+      'EMP_NO' + //
+      ', FIRST_NAME' + //
+      ', LAST_NAME' + //
+      ', PHONE_EXT' + //
+      ', HIRE_DATE' + //
+      ', DEPT_NO' + //
+      ', JOB_CODE' + //
+      ', JOB_GRADE' + //
+      ', JOB_COUNTRY' + //
+      ', SALARY' + //
+      ') VALUES (' + //
+      IntToStr(AEmpNo) + //
+      ', ' + QuotedStr(AFullName) + //
+      ', ' + QuotedStr(AFullName) + //
+      ', ''250''' + //
+      ', ''28-DEC-1988 00:00:00''' + //
+      ', ''600''' + //
+      ', ''VP''' + //
+      ', 2' + //
+      ', ''USA''' + //
+      ', 99999)';
+   try
+      FDQry.ExecSQL;
+      Result := True;
+   except
+      On E: Exception do
+      begin
+         ShowMessage(E.Message);
+         Result := False;
+      end;
+   end;
 end;
 
 procedure TSM.FDConnBeforeConnect(Sender: TObject);
