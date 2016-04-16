@@ -27,7 +27,7 @@
 *.rar
 *.7z*
 *.exe
-*.dll
+#*.dll
 *.bpl
 *.bpi
 *.dcp
