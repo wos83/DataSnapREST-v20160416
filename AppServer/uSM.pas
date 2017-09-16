@@ -134,7 +134,7 @@ end;
 
 procedure TSM.FDConnBeforeConnect(Sender: TObject);
 begin
-   FDPhysFBDriverLink.VendorLib := ExtractFilePath(ParamStr(0)) + 'fbclient.dll';
+   //FDPhysFBDriverLink.VendorLib := ExtractFilePath(ParamStr(0)) + 'fbclient.dll';
 
    FDConn.Params.Values['Database'] := ExtractFilePath(ParamStr(0)) + 'EMPLOYEE.FDB';
    FDConn.Params.Values['UserName'] := 'sysdba';
